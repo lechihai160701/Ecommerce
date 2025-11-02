@@ -1,12 +1,19 @@
-import { useState, useEffect } from "react";
+import {
+  CloseCircleOutlined,
+  CloseOutlined,
+  EyeOutlined,
+  HeartOutlined,
+} from "@ant-design/icons";
+import { onAuthStateChanged } from "firebase/auth";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { auth } from "../firebase";
-import { onAuthStateChanged } from "firebase/auth";
 import { toast } from "react-toastify";
-import { Rating, numberWithCommas, BasicModal } from "../Common";
+import { BasicModal, Rating, numberWithCommas } from "../Common";
+import { auth } from "../firebase";
 import { addCart } from "../redux/cartItemSlice";
-
+import { Button, Modal } from "antd";
+import { Dialog, useMediaQuery, useTheme } from "@mui/material";
 const ProductCard = (props) => {
   const { data } = props;
   const [user, setUser] = useState("");
@@ -42,6 +49,9 @@ const ProductCard = (props) => {
       unsubscribe();
     };
   }, []);
+
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm")); // nếu mobile thì full
   return (
     <div className="product__card">
       <div className="product__card__item">
@@ -74,16 +84,22 @@ const ProductCard = (props) => {
             <div className="lines"></div>
             <div className="product-additional-content__view">
               <span className="product-additional-content__view-icon">
-                <i className="fa-regular fa-eye" onClick={handleOpen}></i>
+                <Button icon={<EyeOutlined />} onClick={handleOpen} />
               </span>
-              {open ? (
-                <BasicModal
-                  item={props}
+              {open && (
+                <Modal
                   open={open}
-                  handleClose={handleClose}
-                />
-              ) : (
-                <></>
+                  onCancel={handleClose}
+                  footer={null}
+                  closeIcon={
+                    <Button
+                      style={{ outline: "none", border: "none" }}
+                      icon={<CloseOutlined style={{ fontSize: 24 }} />}
+                    />
+                  }
+                >
+                  <BasicModal item={props} />
+                </Modal>
               )}
             </div>
             <div className="product-additional-content__heart">
@@ -91,7 +107,7 @@ const ProductCard = (props) => {
                 className="product-additional-content__view-icon"
                 onClick={handleAdd}
               >
-                <i className="fa-regular fa-heart"></i>
+                <Button icon={<HeartOutlined />} />
               </p>
             </div>
           </div>

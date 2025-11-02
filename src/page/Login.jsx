@@ -18,12 +18,12 @@ const Login = () => {
     },
     validationSchema: Yup.object({
       email: Yup.string()
-        .required("Required")
+        .required("Please enter email address")
         .matches(
           /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
           "Please enter a valid email address"
         ),
-      password: Yup.string().required("Required"),
+      password: Yup.string().required("Please enter password"),
     }),
     onSubmit: async (e) => {
       if (e.email === "" || e.password === "") {
