@@ -1,0 +1,74 @@
+.contact {
+  padding: 0 70px;
+  margin: 0 auto;
+  max-width: 1150px;
+  font-weight: 300;
+  .section .section__title::after {
+    content: none !important;
+  }
+  &__info {
+    text-align: center;
+    align-items: center;
+    &__name {
+      line-height: 2;
+      span {
+        font-size: 1.225rem;
+      }
+    }
+    &__content {
+      p {
+        font-size: 0.975rem;
+        line-height: 1.6;
+      }
+    }
+  }
+  &__feedback {
+    &__title {
+      text-align: center;
+      text-transform: uppercase;
+    }
+    &__content {
+      width: 100%;
+    }
+  }
+  &__form {
+    &__label {
+      display: inherit;
+      margin-top: 12px;
+      & > :first-child {
+        margin: 0;
+      }
+    }
+    &__input {
+      --border-width: 0 0 3px 0;
+      width: 100%;
+      padding: 8px 0 8px 8px;
+      font-size: 1rem;
+      border-width: var(--border-width);
+      border-bottom: 1px solid #111;
+      box-sizing: border-box;
+      direction: ltr;
+      min-height: 42px;
+      &:hover {
+        border-width: var(--border-width, 1px);
+        border-style: solid;
+      }
+      &:not(:invalid):focus {
+        border-width: var(--border-width, 1px);
+      }
+    }
+    &__submit {
+      cursor: pointer;
+      width: 100%;
+      margin: 20px 0;
+      font-weight: 300;
+      font-size: 1.125rem;
+      border: none;
+      outline: none;
+      background: transparent;
+      &:hover {
+        color: rgb(233, 138, 138);
+      }
+    }
+  }
+}
