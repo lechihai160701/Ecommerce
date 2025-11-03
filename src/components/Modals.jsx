@@ -7,6 +7,8 @@ import { toast } from "react-toastify";
 import { Grid } from "../Common";
 import { auth } from "../firebase";
 import { addCart } from "../redux/cartItemSlice";
+import { Button, Image, Input } from "antd";
+import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 
 const BasicModal = (props) => {
   const { item } = props;
@@ -16,9 +18,14 @@ const BasicModal = (props) => {
   const dispatch = useDispatch();
   const handleQuantity = (type) => {
     if (type === "PLUS") {
-      setQuantity((prev) => prev + 1);
+      setQuantity((prev) => {
+        return prev + 1;
+      });
     } else if (type === "MINUS") {
-      setQuantity((prev) => prev - 1);
+      setQuantity((prev) => {
+        if (prev === 0) return 0;
+        return prev - 1;
+      });
     }
   };
   const handleAdd = (e) => {
@@ -52,7 +59,7 @@ const BasicModal = (props) => {
         <Grid col={2} mdCol={1} smCol={1}>
           <div className="product-left">
             <figure className="product-left-image">
-              <img src={item.data.image} alt={`${item.data.title}`} />
+              <Image src={item.data.image} alt={item.data.item} />
             </figure>
           </div>
           <div className="product-right">
@@ -61,18 +68,34 @@ const BasicModal = (props) => {
             <p className="product-right-desc">{item.data.description}</p>
 
             <div className="product-right-inner">
-              <div className="product-right-inner-quantity">
-                <span>{quantity}</span>
-                <div className="product-right-inner-quantity-btn">
-                  <button onClick={() => handleQuantity("PLUS")}>+</button>
-                  <button onClick={() => handleQuantity("MINUS")}>-</button>
+              <div className="product-right-inner-props">
+                <Button
+                  icon={<PlusOutlined />}
+                  onClick={() => handleQuantity("PLUS")}
+                  shape="default"
+                />
+                <div className="product-right-inner-quantity">
+                  <span>{quantity}</span>
                 </div>
+                <Button
+                  icon={<MinusOutlined />}
+                  onClick={() => handleQuantity("MINUS")}
+                  shape="default"
+                />
               </div>
+            </div>
+            <div className="product-right-inner-btn">
               <button
                 className="btn btn-add-to-cart btn-modal"
                 onClick={handleAdd}
               >
                 Add to cart
+              </button>
+              <button
+                className="btn btn-cart-details btn-primary"
+                onClick={() => navigate("/catelog")}
+              >
+                Xem chi tiết
               </button>
             </div>
           </div>

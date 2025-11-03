@@ -4,6 +4,9 @@ import { auth } from "../firebase";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 
 import logo from "../logo.png";
+import { Badge } from "antd";
+import { CarOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import { useSelector } from "react-redux";
 const mainNav = [
   {
     display: "Trang chủ",
@@ -24,6 +27,7 @@ const mainNav = [
 ];
 
 const Header = () => {
+  const { numberCart } = useSelector((state) => state.cart);
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [user, setUser] = useState("");
@@ -36,7 +40,7 @@ const Header = () => {
 
   const headerRef = useRef(null);
   useEffect(() => {
-    window.addEventListener("scroll", () => {
+    const handleScroll = () => {
       if (
         document.body.scrollTop > 80 ||
         document.documentElement.scrollTop > 80
@@ -45,11 +49,15 @@ const Header = () => {
       } else {
         headerRef.current.classList.remove("shrink");
       }
-    });
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
     return () => {
-      window.removeEventListener("scroll");
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
   const handleLogOut = async () => {
     try {
       await logOut();
@@ -100,9 +108,11 @@ const Header = () => {
               className="header__menu__item header__menu__right__item"
               title="Giỏ hàng"
             >
-              <Link to="/cart">
-                <i className="bx bx-shopping-bag"></i>
-              </Link>
+              <Badge count={numberCart} showZero>
+                <Link to="/cart">
+                  <ShoppingCartOutlined style={{ fontSize: 24 }} />
+                </Link>
+              </Badge>
             </div>
             {user ? (
               <div className="header__user">

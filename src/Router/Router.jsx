@@ -23,7 +23,7 @@ const Router = () => {
       .then((res) => setDatas(res.data))
       .catch((err) => console.log(err));
   }, []);
-  const getAllProducts = datas;
+
   const getProducts = (count) => {
     const max = datas?.length - count;
     const min = 0;
@@ -31,6 +31,7 @@ const Router = () => {
     return datas.slice(start, start + count);
   };
   const getProductBySlug = (slug) => datas.find((e) => e.id === Number(slug));
+
   const getCartItemDetails = (cartItems) => {
     let res = [];
     if (cartItems.length > 0) {
@@ -44,7 +45,6 @@ const Router = () => {
   };
 
   const productData = {
-    getAllProducts,
     getProducts,
     getProductBySlug,
     getCartItemDetails,
