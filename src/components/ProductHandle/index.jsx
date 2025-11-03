@@ -11,51 +11,60 @@ import {
 import ProductCardSkeleton from "../ProductCardSkeleton";
 import styles from "./ProductHandle.module.scss";
 
-const ProductHanlde = (props) => {
+const ProductHandle = (props) => {
   const { product, category } = props;
-  const [products, setProducts] = useState(product);
+  const [allProducts, setAllProducts] = useState(product); // danh sách gốc
+  const [filteredProducts, setFilteredProducts] = useState(product); // danh sách hiển thị
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [searchText, setSearchText] = useState("");
   const refInput = useRef(null);
 
-  const handleSearchProduct = (e) => {
-    setIsLoading(true);
-    setTimeout(() => {
-      const search = e.target.value;
-      if (search.trim() !== "") {
-        let result = products.filter((item) => {
-          return item.title.toUpperCase().includes(search.toUpperCase());
-        });
-        setProducts(result);
-        refInput.current.focus();
-        setIsLoading(false);
-      } else {
-        setProducts(product);
-        setIsLoading(false);
-        refInput.current.focus();
-      }
-    }, 1000);
+  // Hàm xử lý lọc tổng hợp (theo cả category và search)
+  const filterProducts = (categoryValue, searchValue) => {
+    let result = allProducts;
+
+    if (categoryValue.trim() !== "") {
+      result = result.filter((item) =>
+        item.category.toUpperCase().includes(categoryValue.toUpperCase())
+      );
+    }
+
+    if (searchValue.trim() !== "") {
+      result = result.filter((item) =>
+        item.title.toUpperCase().includes(searchValue.toUpperCase())
+      );
+    }
+
+    return result;
   };
 
-  const handleChangeCategory = (e) => {
+  const handleSearchProduct = (e) => {
+    const value = e.target.value;
+    setSearchText(value);
     setIsLoading(true);
     setTimeout(() => {
-      if (e.trim() !== "") {
-        let result = products.filter((item) => {
-          return item.category.toUpperCase().includes(e.toUpperCase());
-        });
-        setProducts(result);
-        setIsLoading(false);
-      } else {
-        setProducts(product);
-        setIsLoading(false);
-      }
-    }, 1000);
+      const result = filterProducts(selectedCategory, value);
+      setFilteredProducts(result);
+      setIsLoading(false);
+    }, 500);
+  };
+
+  const handleChangeCategory = (value) => {
+    setSelectedCategory(value || ""); // clear = ""
+    setIsLoading(true);
+    setTimeout(() => {
+      const result = filterProducts(value || "", searchText);
+      setFilteredProducts(result);
+      setIsLoading(false);
+    }, 500);
   };
 
   useEffect(() => {
     if (product.length > 0) {
+      setAllProducts(product);
+      setFilteredProducts(product);
       setIsLoading(false);
-      setProducts(product);
     } else {
       setIsLoading(true);
     }
@@ -82,22 +91,24 @@ const ProductHanlde = (props) => {
               </Select>
               <Input.Search
                 className={clsx(styles.product_handle_filter_option_input)}
-                type="text"
                 placeholder="Tên sản phẩm"
                 ref={refInput}
                 onChange={handleSearchProduct}
+                value={searchText}
               />
             </div>
           </div>
         </SectionBody>
       </Section>
+
       <div className={clsx(styles.product_name)}>
         <SectionTitle>Product</SectionTitle>
       </div>
+
       <SectionBody>
         {!isLoading ? (
           <Grid col={4} mdCol={2} smCol={1} gap={20}>
-            {products.map((item) => (
+            {filteredProducts.map((item) => (
               <ProductCard key={item.id} data={item} />
             ))}
           </Grid>
@@ -112,4 +123,5 @@ const ProductHanlde = (props) => {
     </Fragment>
   );
 };
-export default ProductHanlde;
+
+export default ProductHandle;
