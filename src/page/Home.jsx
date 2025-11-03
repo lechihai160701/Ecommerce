@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
 import {
   Helmet,
   Slider,
@@ -8,10 +8,21 @@ import {
   SectionTitle,
   Grid,
   Policy,
-  ProductCart,
+  ProductCard,
   IntroDuce,
 } from "../Common";
-const Home = ({ data }) => {
+import axios from "axios";
+const Home = () => {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    async function getData() {
+      const res = await axios.get("https://fakestoreapi.com/products");
+      return res;
+    }
+    getData()
+      .then((res) => setData(res.data))
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <Helmet title="Trang chủ">
       <Slider />
@@ -36,7 +47,7 @@ const Home = ({ data }) => {
             {data.map((item) => {
               return (
                 item.category === "men's clothing" && (
-                  <ProductCart key={item.id} data={item} />
+                  <ProductCard key={item.id} data={item} />
                 )
               );
             })}
@@ -50,7 +61,7 @@ const Home = ({ data }) => {
             {data.map((item) => {
               return (
                 item.category === "women's clothing" && (
-                  <ProductCart key={item.id} data={item} />
+                  <ProductCard key={item.id} data={item} />
                 )
               );
             })}
@@ -64,7 +75,7 @@ const Home = ({ data }) => {
             {data.map((item) => {
               return (
                 item.category === "electronics" && (
-                  <ProductCart key={item.id} data={item} />
+                  <ProductCard key={item.id} data={item} />
                 )
               );
             })}
@@ -78,7 +89,7 @@ const Home = ({ data }) => {
             {data.map((item) => {
               return (
                 item.category === "jewelery" && (
-                  <ProductCart key={item.id} data={item} />
+                  <ProductCard key={item.id} data={item} />
                 )
               );
             })}

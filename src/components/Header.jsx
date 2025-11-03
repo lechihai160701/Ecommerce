@@ -1,12 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
-import { signOut, onAuthStateChanged } from "firebase/auth";
 
-import logo from "../logo.png";
+import { ShoppingCartOutlined } from "@ant-design/icons";
 import { Badge } from "antd";
-import { CarOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
+import logo from "../logo.png";
 const mainNav = [
   {
     display: "Trang chủ",
@@ -14,7 +14,7 @@ const mainNav = [
   },
   {
     display: "Sản phẩm",
-    path: "/catelog",
+    path: "/product",
   },
   {
     display: "Bài viết",

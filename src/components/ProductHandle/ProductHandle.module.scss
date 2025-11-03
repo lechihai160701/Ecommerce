@@ -1,0 +1,31 @@
+@import "../../sass/variable";
+@import "../../sass/mixin";
+@import "../../sass/base";
+
+.product_handle_filter {
+  > span {
+    font-size: 20px;
+  }
+  &_option {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    width: 50%;
+    margin: 15px 0;
+    @include mobile {
+      flex-direction: column;
+      width: 100%;
+    }
+    &_select,
+    &_input {
+      width: 50%;
+      @include mobile {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.product_name {
+  margin-bottom: 25px;
+}

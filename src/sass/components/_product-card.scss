@@ -46,6 +46,15 @@
       color: rgb(251, 110, 46);
     }
   }
+
+  &__isAdd {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: orange;
+    border: 0.5px solid;
+    border-color: orange;
+  }
 }
 
 .product-image-inner {

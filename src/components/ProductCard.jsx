@@ -84,7 +84,7 @@ const ProductCard = (props) => {
 
       <div className="product-image-inner">
         <Link
-          to={`/catelog/${props.data.id}`}
+          to={`/product/?nameProduct=${props.data.title}`}
           className="button add_to_cart_button"
         >
           <span>Add to cart</span>
@@ -130,15 +130,17 @@ const ProductCard = (props) => {
         </div>
       </div>
 
-      <Link to={`/catelog/${data.id}`}></Link>
+      <Link to={`/product/?nameProduct=${data.title}`}></Link>
 
       {(() => {
         const check = carts.find((item) => item.id === data.id);
         if (check) {
           return (
-            <div className="product__card__isAdd">
-              <span className="product__card__isAdd-add">
-                <CheckOutlined />
+            <div className="product__card__item__isAdd">
+              <span className="product__card__item__isAdd-add">
+                <Tooltip title="Đã thêm vào giỏ hàng">
+                  <CheckOutlined />
+                </Tooltip>
               </span>
             </div>
           );

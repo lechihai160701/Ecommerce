@@ -1,40 +1,56 @@
-import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import {
-  Grid,
+  Banner,
   Helmet,
-  ProductCart,
-  ProductView,
+  ProductDetail,
+  ProductHandle,
   Section,
   SectionBody,
-  SectionTitle,
 } from "../Common";
-const Product = ({ ...rest }) => {
-  const { slug } = useParams();
-  const product = rest.getProductBySlug(slug);
+import banner from "../banner.png";
 
+const Product = () => {
+  const [searchParam] = useSearchParams();
+  const nameProduct = searchParam.get("nameProduct");
+
+  const [data, setData] = useState([]);
+  const [category, setCategory] = useState([]);
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [product]);
+    const getAllData = async () => {
+      try {
+        const res = await axios.get("https://fakestoreapi.com/products");
+        if (res.status === 200) {
+          const cate = [...new Set(res.data.flatMap((item) => item.category))];
+
+          setCategory(cate);
+          setData(res.data);
+        } else if (res.status !== 200) {
+          alert("Có lỗi!");
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getAllData();
+  }, []);
+
+  if (nameProduct) {
+    return <ProductDetail />;
+  }
+
   return (
-    <Helmet title={product.title}>
-      <Section>
-        <SectionBody>
-          <ProductView product={product} />
-        </SectionBody>
-      </Section>
-      <Section>
-        <SectionTitle>Related Products</SectionTitle>
-        <SectionBody>
-          <Grid col={4} mdCol={2} smCol={1} gap={20}>
-            {rest.getProducts(4).map((item) => (
-              <ProductCart key={item.id} data={item} />
-            ))}
-          </Grid>
-        </SectionBody>
-      </Section>
-    </Helmet>
+    <React.Fragment>
+      <Helmet title="Product">
+        <Banner img={banner} alt="Banner" marginBottom={50} />
+        <Section>
+          <SectionBody>
+            <ProductHandle product={data} category={category} />
+          </SectionBody>
+        </Section>
+      </Helmet>
+    </React.Fragment>
   );
 };
-
-export default Product;
+export default React.memo(Product);
