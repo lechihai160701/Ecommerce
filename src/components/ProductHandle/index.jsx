@@ -39,7 +39,7 @@ const ProductHanlde = (props) => {
   const handleChangeCategory = (e) => {
     setIsLoading(true);
     setTimeout(() => {
-      if (e) {
+      if (e.trim() !== "") {
         let result = products.filter((item) => {
           return item.category.toUpperCase().includes(e.toUpperCase());
         });

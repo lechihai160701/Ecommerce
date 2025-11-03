@@ -1,4 +1,5 @@
-import Box from "@mui/material/Box";
+import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
+import { Button, Image } from "antd";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -7,8 +8,6 @@ import { toast } from "react-toastify";
 import { Grid } from "../Common";
 import { auth } from "../firebase";
 import { addCart } from "../redux/cartItemSlice";
-import { Button, Image, Input } from "antd";
-import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 
 const BasicModal = (props) => {
   const { item } = props;
