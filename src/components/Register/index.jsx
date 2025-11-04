@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "../../Common";
 import { auth } from "../../firebase";
-import styles from "../Login/Login.module.scss";
+import styles from "../../page/Login/Login.module.scss";
 
 const Register = () => {
   const navigate = useNavigate();
