@@ -1,11 +1,16 @@
-import React, { useState, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import GoogleButton from "react-google-button";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { Helmet, Button, InputField } from "../Common";
+import { UserOutlined } from "@ant-design/icons";
+import { Button } from "antd";
+import clsx from "clsx";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
+import { useFormik } from "formik";
+import React, { useRef, useState } from "react";
+import GoogleButton from "react-google-button";
+import { Link, useNavigate } from "react-router-dom";
+import * as Yup from "yup";
+import { Helmet, InputField } from "../../Common";
+import { auth } from "../../firebase";
+import styles from "./Login.module.scss";
+
 const Login = () => {
   const [error, setError] = useState("");
   const refInputEmail = useRef(null);
@@ -18,12 +23,12 @@ const Login = () => {
     },
     validationSchema: Yup.object({
       email: Yup.string()
-        .required("Please enter email address")
+        .required("Vui lòng nhập địa chỉ email")
         .matches(
           /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-          "Please enter a valid email address"
+          "Địa chỉ email không hợp lệ"
         ),
-      password: Yup.string().required("Please enter password"),
+      password: Yup.string().required("Vui lòng nhập mật khẩu"),
     }),
     onSubmit: async (e) => {
       if (e.email === "" || e.password === "") {
@@ -46,10 +51,10 @@ const Login = () => {
   const handleGoogleSignIn = () => {};
   return (
     <Helmet title="Đăng nhập">
-      <div className="login">
-        <div className="login__name">Login</div>
-        <form className="form" onSubmit={formik.handleSubmit}>
-          <div className="form__group">
+      <div className={clsx(styles.login)}>
+        <div className={clsx(styles.login__name)}>Login</div>
+        <form className={clsx(styles.form)} onSubmit={formik.handleSubmit}>
+          <div className={clsx(styles.form__group)}>
             <InputField
               {...formik}
               label="email"
@@ -59,7 +64,7 @@ const Login = () => {
               <p className="error">{formik.errors.email}</p>
             )}
           </div>
-          <div className="form__group">
+          <div className={clsx(styles.form__group)}>
             <InputField
               {...formik}
               label="password"
@@ -69,17 +74,26 @@ const Login = () => {
               <p className="error">{formik.errors.password}</p>
             )}
           </div>
-          <Button size="sm" type="submit">
+          <Button icon={<UserOutlined />} size="large" htmlType="submit">
             Đăng nhập
           </Button>
-          <div className="google__btn" onClick={handleGoogleSignIn}>
+          <div
+            className={clsx(styles.google__btn)}
+            onClick={handleGoogleSignIn}
+          >
             <GoogleButton type="dark" />
           </div>
         </form>
-        {error && <span className="error">{error}</span>}
-        <div className="login__regis">
+
+        <div className={clsx(styles.login__regis)}>
           Do not have an account? <Link to="/register">Create account</Link>
         </div>
+
+        {error && (
+          <span className={`error ${clsx(styles.error)}`}>
+            {error || "Có lỗi xảy ra!"}
+          </span>
+        )}
       </div>
     </Helmet>
   );

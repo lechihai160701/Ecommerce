@@ -52,9 +52,7 @@ const Index = () => {
   return (
     <Helmet title={product ? product.title : ""}>
       <Section>
-        <SectionBody>
-          {product && <ProductView product={product} />}
-        </SectionBody>
+        <SectionBody>{<ProductView product={product} />}</SectionBody>
       </Section>
       <Section>
         <SectionTitle>Related Products</SectionTitle>

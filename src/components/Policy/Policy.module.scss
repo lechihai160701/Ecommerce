@@ -1,3 +1,7 @@
+@import "../../sass/variable";
+@import "../../sass/mixin";
+@import "../../sass/base";
+
 .policy {
   @include flex(flex-start, flex-start);
   color: $main-color;

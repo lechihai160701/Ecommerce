@@ -1,3 +1,7 @@
+@import "../../sass/variable";
+@import "../../sass/mixin";
+@import "../../sass/base";
+
 .login,
 .register {
   padding: 30px;
@@ -18,19 +22,35 @@
     margin-bottom: 20px;
     color: rgb(54, 54, 54);
   }
-
   button {
-    font-size: 0.9rem;
-    padding: 0px 0px;
-    margin-bottom: 15px;
-    &:hover {
-      color: rgb(226, 220, 220);
-    }
+    width: 100%;
   }
+
+  .google__btn {
+    margin: 15px 0 0 0;
+  }
+
   &__regis {
+    margin: 15px 0;
+
     a {
       text-decoration: underline !important;
       color: $main-color !important;
+    }
+  }
+
+  .error {
+    margin-top: 10px;
+  }
+}
+.form {
+  &__group {
+    margin-bottom: 20px;
+    input {
+      padding: 10px;
+      margin: 5px 0;
+      width: 100%;
+      font-size: 14px;
     }
   }
 }

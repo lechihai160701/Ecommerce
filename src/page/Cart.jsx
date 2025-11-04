@@ -3,13 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Helmet, Banner, Button } from "../Common";
+import { Helmet, Banner } from "../Common";
 import {
   clearAllCart,
   deleteCart,
   increaseQuantity,
   decreaseQuantity,
 } from "../redux/cartItemSlice";
+import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
+import { Button } from "antd";
 const Cart = () => {
   const getState = useSelector((state) => state.cart);
   const [carts, setCarts] = useState(getState.carts);
@@ -120,25 +122,23 @@ const Cart = () => {
                       <div className="cart__item__info__name__price">
                         {cart.price.toLocaleString("en-US")}$
                       </div>
-                      <div className="cart__item__info__quantity">
-                        <div className="product__view__right__item__quantity">
-                          <div
-                            className="product__view__right__item__quantity__btn"
+                      <div className="product-right-inner">
+                        <div className="product-right-inner-props">
+                          <Button
+                            icon={<MinusOutlined />}
                             onClick={() =>
                               handleChangQuantity("MINUS", cart.id)
                             }
-                          >
-                            <i className="bx bx-minus"></i>
+                            shape="default"
+                          />
+                          <div className="product-right-inner-quantity">
+                            <span> {cart.quantity}</span>
                           </div>
-                          <div className="product__view__right__item__quantity__input">
-                            {cart.quantity}
-                          </div>
-                          <div
-                            className="product__view__right__item__quantity__btn"
+                          <Button
+                            icon={<PlusOutlined />}
                             onClick={() => handleChangQuantity("PLUS", cart.id)}
-                          >
-                            <i className="bx bx-plus"></i>
-                          </div>
+                            shape="default"
+                          />
                         </div>
                       </div>
                       <div
@@ -162,11 +162,9 @@ const Cart = () => {
               </div>
             </div>
             <div className="cart__info__btn">
-              <Button size="block" onClick={handleOrder}>
-                Đặt hàng
-              </Button>
-              <Button size="block">
-                <Link to="/catelog">Tiếp tục mua hàng</Link>
+              <Button onClick={handleOrder}>Đặt hàng</Button>
+              <Button>
+                <Link to="/product">Tiếp tục mua hàng</Link>
               </Button>
             </div>
           </div>

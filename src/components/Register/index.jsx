@@ -1,9 +1,12 @@
-import React, { useState } from "react";
-import Helmet from "./Helmet";
-import { Link, useNavigate } from "react-router-dom";
-import { Button } from "../Common";
+import { UserAddOutlined } from "@ant-design/icons";
+import { Button } from "antd";
+import clsx from "clsx";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Helmet } from "../../Common";
+import { auth } from "../../firebase";
+import styles from "../Login/Login.module.scss";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -27,42 +30,50 @@ const Register = () => {
   };
   return (
     <Helmet title="Đăng ký">
-      <div className="register">
-        <div className="register__name">Register</div>
-        <form onSubmit={handleSubmit} className="form">
-          <div className="form__group">
+      <div className={clsx(styles.register)}>
+        <div className={clsx(styles.register__name)}>Register</div>
+        <form onSubmit={handleSubmit} className={clsx(styles.form)}>
+          <div className={clsx(styles.form__group)}>
             <input
               type="text"
-              placeholder="Enter your name..."
+              placeholder="Email..."
               id="email"
               name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-          </div>
-          <div className="form__group">
             <input
               type="text"
-              placeholder="Enter your password..."
+              placeholder="Mật khẩu..."
               id="password"
               name="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
             <input
-              style={{ marginTop: 10 }}
               type="text"
               id="confirmpassword"
               name="confirmpassword"
-              placeholder="ConfirmPassword..."
+              placeholder="Xác nhận lại mật khẩu..."
               value={confirmpassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </div>
-          <Button size="sm">Register</Button>
+          <Button
+            type="primary"
+            size="large"
+            icon={<UserAddOutlined />}
+            htmlType="submit"
+          >
+            Register
+          </Button>
         </form>
-        {error && <span className="error">{error}</span>}
-        <div className="login__regis">
+        {error && (
+          <span className={`error ${clsx(styles.error)}`}>
+            {error || "Có lỗi xảy ra!"}
+          </span>
+        )}
+        <div className={clsx(styles.login__regis)}>
           <Link to="/login">Back to login page?</Link>
         </div>
       </div>

@@ -5,9 +5,11 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Grid } from "../Common";
-import { auth } from "../firebase";
-import { addCart } from "../redux/cartItemSlice";
+import { Grid } from "../../Common";
+import { auth } from "../../firebase";
+import { addCart } from "../../redux/cartItemSlice";
+import clsx from "clsx";
+import styles from "./Modal.module.scss";
 
 const BasicModal = (props) => {
   const { item } = props;
@@ -54,26 +56,32 @@ const BasicModal = (props) => {
   }, []);
   return (
     <div>
-      <div className="product">
+      <div className={clsx(styles.product)}>
         <Grid col={2} mdCol={1} smCol={1}>
-          <div className="product-left">
-            <figure className="product-left-image">
+          <div className={clsx(styles.product_left)}>
+            <figure className={clsx(styles.product_left_image)}>
               <Image src={item.data.image} alt={item.data.item} />
             </figure>
           </div>
-          <div className="product-right">
-            <h1 className="product-right-title">{item.data.title}</h1>
-            <p className="product-right-price">{item.data.price}đ</p>
-            <p className="product-right-desc">{item.data.description}</p>
+          <div className={clsx(styles.product_right)}>
+            <h1 className={clsx(styles.product_right_title)}>
+              {item.data.title}
+            </h1>
+            <p className={clsx(styles.product_right_price)}>
+              {item.data.price}đ
+            </p>
+            <p className={clsx(styles.product_right_desc)}>
+              {item.data.description}
+            </p>
 
-            <div className="product-right-inner">
-              <div className="product-right-inner-props">
+            <div className={clsx(styles.product_right_inner)}>
+              <div className={clsx(styles.product_right_inner_props)}>
                 <Button
                   icon={<PlusOutlined />}
                   onClick={() => handleQuantity("PLUS")}
                   shape="default"
                 />
-                <div className="product-right-inner-quantity">
+                <div className={clsx(styles.product_right_inner_quantity)}>
                   <span>{quantity}</span>
                 </div>
                 <Button
@@ -83,16 +91,26 @@ const BasicModal = (props) => {
                 />
               </div>
             </div>
-            <div className="product-right-inner-btn">
+            <div className={clsx(styles.product_right_inner_btn)}>
               <button
-                className="btn btn-add-to-cart btn-modal"
+                className={`${clsx(
+                  styles.btn,
+                  styles.btn_add_to_cart,
+                  styles.btn_modal
+                )}`}
                 onClick={handleAdd}
               >
                 Add to cart
               </button>
               <button
-                className="btn btn-cart-details btn-primary"
-                onClick={() => navigate("/catelog")}
+                className={clsx(
+                  styles.btn,
+                  styles.btn_cart_details,
+                  styles.btn_primary
+                )}
+                onClick={() => {
+                  navigate(`/product/?nameProduct=${item.data.title}`);
+                }}
               >
                 Xem chi tiết
               </button>

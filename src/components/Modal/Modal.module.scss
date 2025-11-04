@@ -9,9 +9,9 @@
   box-shadow: 3px 3px 3px rgb(0 0 0 / 5%);
   padding: 20px;
 }
-.product-left {
+.product_left {
   border: 0.5px solid #e5e5e5;
-  &-image {
+  &_image {
     position: relative;
     background-color: rgba(0, 0, 0, 0.005);
     width: 100%;
@@ -27,9 +27,9 @@
   }
 }
 
-.product-right {
+.product_right {
   padding: 80px 20px 30px 30px;
-  &-title {
+  &_title {
     font-size: 28px;
     margin: -10px 0 5px 0;
     font-weight: 400;
@@ -39,7 +39,7 @@
     -ms-word-wrap: break-word;
     word-wrap: break-word;
   }
-  &-price {
+  &_price {
     font-weight: 400;
     letter-spacing: 0.05em;
     color: #000;
@@ -48,7 +48,7 @@
     margin: 10px 0;
     opacity: 0.8;
   }
-  &-desc {
+  &_desc {
     font-weight: 300;
     line-height: 1.5em;
     letter-spacing: 0.1em;
@@ -61,17 +61,17 @@
   }
 }
 
-.btn-modal {
+.btn_modal {
   position: absolute;
   background: #111;
 }
 
-.btn-primary {
+.btn_primary {
   position: absolute;
   background: #4040fd;
 }
 
-.btn-close {
+.btn_close {
   top: 0;
   right: 0;
   padding: 24px;
@@ -79,13 +79,13 @@
   font-weight: 100;
 }
 //////
-.product-right-inner {
+.product_right_inner {
   display: flex;
   flex-direction: row;
   gap: 30px;
   justify-content: space-around;
   margin: 30px 0;
-  &-props {
+  &_props {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -96,7 +96,7 @@
       border-radius: 8px;
     }
   }
-  &-quantity {
+  &_quantity {
     width: 40px;
     height: 40px;
     border: 1px solid #d9d9d9; /* giống border của button mặc định */
@@ -112,7 +112,7 @@
     &:hover {
       border-color: #4096ff;
     }
-    &-btn {
+    &_btn {
       display: flex;
       flex-direction: column;
       button {
@@ -128,7 +128,7 @@
       }
     }
   }
-  &-btn {
+  &_btn {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -136,37 +136,41 @@
     transition-timing-function: linear;
     transition-duration: 300ms;
     transition-delay: 100ms;
+    button {
+      border: none;
+      outline: none;
+    }
   }
 }
 
-.btn-add-to-cart {
+.btn_add_to_cart {
   position: relative;
   flex: 1;
   font-size: 18px;
   font-weight: 400;
   padding: 15px;
-
+  color: white;
   &:hover {
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.9);
     opacity: 0.8;
   }
 }
 
-.btn-cart-details {
+.btn_cart_details {
   position: relative;
   flex: 1;
   font-size: 18px;
   font-weight: 400;
   padding: 15px;
-
+  color: white;
   &:hover {
-    background: #9090f5;
+    background: #6a6acf;
     opacity: 0.8;
   }
 }
 
 .product {
-  .product-left {
+  .product_left {
     margin: 25px;
   }
 }

@@ -102,7 +102,7 @@ const ProductHandle = (props) => {
       </Section>
 
       <div className={clsx(styles.product_name)}>
-        <SectionTitle>Product</SectionTitle>
+        <SectionTitle>Sản phẩm</SectionTitle>
       </div>
 
       <SectionBody>

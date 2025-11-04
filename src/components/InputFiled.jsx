@@ -3,7 +3,7 @@ const InputField = (props) => {
   return (
     <>
       <input
-        placeholder={!placeholder ? `Enter your ${label}...` : ""}
+        placeholder={!placeholder ? `Nhập ${label}...` : ""}
         className={className !== "undefined" ? className : ""}
         type={label}
         id={label}

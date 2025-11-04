@@ -46,7 +46,7 @@ const blog = [
 export const recentPosts = [
   {
     id: 1,
-    img: "https://thoitrangteenthienphuc.vn/upload/news/ao-khoa-kaki-nu-5156.jpg",
+    img: "https://dongphucunicorn.com/wp-content/uploads/2019/12/ao-khoac-nu-co-non-mau-xanh-navy-800x800.jpg",
     name: "Sed do eiusmod tempor ut",
     date: "May 11, 2022",
   },
@@ -58,13 +58,13 @@ export const recentPosts = [
   },
   {
     id: 3,
-    img: "https://demo.w3layouts.com/demos_new/template_demo/11-06-2021/electronics-mart-liberty-demo_Free/1081434887/web/images/blog-s3.jpg",
+    img: "https://dongphucunicorn.com/wp-content/uploads/2019/12/ao-khoac-nu-co-non-mau-xanh-navy-800x800.jpg",
     name: "Amkmm Ut enim ad minim",
     date: "June 03, 2022",
   },
   {
     id: 4,
-    img: "https://demo.w3layouts.com/demos_new/template_demo/11-06-2021/electronics-mart-liberty-demo_Free/1081434887/web/images/blog-s2.jpg",
+    img: "https://dongphucunicorn.com/wp-content/uploads/2019/12/ao-khoac-nu-co-non-mau-xanh-navy-800x800.jpg",
     name: "Amkmm Ut enim ad minim",
     date: "June 1, 2022",
   },

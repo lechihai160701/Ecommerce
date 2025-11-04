@@ -91,19 +91,16 @@
           margin: 25px 10px;
         }
         &__content {
-          @include flex(flex-start, flex-start);
+          @include flex(center, flex-start);
           &__title {
             opacity: 0.8;
           }
           &__arrive {
-            @include flex(flex-start, flex-start);
+            @include flex(center, flex-start);
             margin-left: 30px;
             span {
               opacity: 0.8;
               margin-right: 20px;
-            }
-            select {
-              cursor: pointer;
             }
           }
         }
@@ -139,6 +136,7 @@
       &__count {
         margin: 20px 0;
         display: inline-flex;
+        align-items: center;
         @include mobile {
           margin: 0 10px;
         }

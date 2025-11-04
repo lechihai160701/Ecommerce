@@ -96,23 +96,23 @@
           }
         }
       }
-      &__quantity {
-        .product__view__right__item__quantity {
-          display: flex;
-          align-items: center;
-          text-align: center;
-          &__btn {
-            border: 1px solid;
-            display: flex;
-            align-items: center;
-          }
-          &__input {
-            border: 1px solid;
-            width: 20px;
-            text-align: center;
-          }
-        }
-      }
+      // &__quantity {
+      //   .product__view__right__item__quantity {
+      //     display: flex;
+      //     align-items: center;
+      //     text-align: center;
+      //     &__btn {
+      //       border: 1px solid;
+      //       display: flex;
+      //       align-items: center;
+      //     }
+      //     &__input {
+      //       border: 1px solid;
+      //       width: 20px;
+      //       text-align: center;
+      //     }
+      //   }
+      // }
     }
   }
 }

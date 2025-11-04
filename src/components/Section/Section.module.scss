@@ -1,3 +1,7 @@
+@import "../../sass/variable";
+@import "../../sass/mixin";
+@import "../../sass/base";
+
 .section {
   margin-bottom: 80px;
   @include mobile {

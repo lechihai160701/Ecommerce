@@ -1,22 +1,27 @@
-import { useNavigate } from "react-router-dom";
+import {
+  LoadingOutlined,
+  MinusOutlined,
+  PlusOutlined,
+} from "@ant-design/icons";
+import { Button, Select, Spin } from "antd";
+import clsx from "clsx";
+import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { auth } from "../firebase";
-import { onAuthStateChanged } from "firebase/auth";
-import { addCart } from "../redux/cartItemSlice";
-import clsx from "clsx";
 import {
+  colors,
+  Comment,
   Helmet,
-  Button,
-  Refer,
+  options,
   Rating,
+  Refer,
   Section,
   SectionBody,
-  Comment,
-  options,
-  colors,
 } from "../Common/index";
+import { auth } from "../firebase";
+import { addCart } from "../redux/cartItemSlice";
 const ProductView = ({ product }) => {
   const [user, setUser] = useState("");
   const [selectPlace, setSelectPlace] = useState("Tp.HCM");
@@ -79,14 +84,26 @@ const ProductView = ({ product }) => {
   }, []);
   useEffect(() => {}, [selectPlace]);
   useEffect(() => {}, [color]);
+
+  if (!product) {
+    return (
+      <div
+        style={{
+          minHeight: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Spin indicator={<LoadingOutlined spin />} size="large" />
+      </div>
+    );
+  }
+
   return (
-    <Helmet title={product.title}>
+    <Helmet title={product ? product?.title : ""}>
       <div className="product">
         <div className="product__view">
-          <img
-            src="https://ldnam.net/wp-content/uploads/2017/08/gi%E1%BA%A3m-gi%C3%A1-3.jpg"
-            alt=""
-          />
           <div className="product__view__refer">
             <div className="product__view__refer__left">
               <div className="product__view__refer__left__img">
@@ -105,12 +122,12 @@ const ProductView = ({ product }) => {
                 <i style={{ marginRight: 5 }}>
                   <u>{product?.rating.rate}</u>
                 </i>
-                <Rating data={product.rating.rate} />
+                <Rating data={product?.rating.rate} />
                 <span className="line__straight"></span>
-                <Refer data={product.rating.count} />
+                <Refer data={product?.rating.count} />
               </div>
               <div className="product__view__refer__right__price">
-                <span>{product.price}$</span>
+                <span>{product?.price}$</span>
               </div>
               <div className="product__view__refer__right__tranpost">
                 <div className="product__view__refer__right__tranpost__content">
@@ -119,15 +136,16 @@ const ProductView = ({ product }) => {
                   </span>
                   <div className="product__view__refer__right__tranpost__content__arrive">
                     <span>Vận chuyển đi</span>
-                    <div className="custom-select">
-                      <select onChange={(e) => setSelectPlace(e.target.value)}>
-                        {options.map((option, i) => (
-                          <option value={option.name} key={i}>
-                            {option.name}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
+                    <Select
+                      onChange={(e) => setSelectPlace(e.target.value)}
+                      value={selectPlace}
+                    >
+                      {options.map((option, i) => (
+                        <Select.Option value={option.name} key={i}>
+                          {option.name}
+                        </Select.Option>
+                      ))}
+                    </Select>
                   </div>
                 </div>
               </div>
@@ -156,42 +174,36 @@ const ProductView = ({ product }) => {
                 <span className="product__view__refer__right__count__title">
                   Số lượng
                 </span>
-                <div className="cart__item__info__quantity">
-                  <div className="product__view__right__item__quantity">
-                    <div
-                      className="product__view__right__item__quantity__btn"
-                      onClick={() => handleQuantity("MINUS")}
-                    >
-                      <i className="bx bx-minus"></i>
-                    </div>
-                    <div className="product__view__right__item__quantity__input">
-                      {quantity}
-                    </div>
-                    <div
-                      className="product__view__right__item__quantity__btn"
+                <div className="product-right-inner">
+                  <div className="product-right-inner-props">
+                    <Button
+                      icon={<PlusOutlined />}
                       onClick={() => handleQuantity("PLUS")}
-                    >
-                      <i className="bx bx-plus"></i>
+                      shape="default"
+                    />
+                    <div className="product-right-inner-quantity">
+                      <span>{quantity}</span>
                     </div>
+                    <Button
+                      icon={<MinusOutlined />}
+                      onClick={() => handleQuantity("MINUS")}
+                      shape="default"
+                    />
                   </div>
                 </div>
               </div>
               <div className="product__view__refer__right__item">
                 <div className="product__view__refer__right__item__add">
-                  <Button size="sm" onClick={() => goToCart()}>
+                  <Button onClick={() => goToCart()} size="large">
                     Mua ngay
                   </Button>
-                  <Button size="sm" onClick={() => addToCart()}>
+                  <Button onClick={() => addToCart()} size="large">
                     Thêm vào giỏ hàng
                   </Button>
                 </div>
               </div>
             </div>
           </div>
-          <img
-            src="https://ldnam.net/wp-content/uploads/2017/08/gi%E1%BA%A3m-gi%C3%A1-3.jpg"
-            alt=""
-          />
         </div>
         <Section>
           <SectionBody>

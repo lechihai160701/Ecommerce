@@ -1,3 +1,7 @@
+@import "../../sass/variable";
+@import "../../sass/mixin";
+@import "../../sass/base";
+
 .blog {
   @include flex(flex-start, space-between);
   gap: 0 50px;
@@ -52,10 +56,10 @@
           padding: 5px;
           background: rgb(247, 246, 246);
           font-weight: 600;
-          &--news {
+          &_news {
             color: rgb(245, 30, 30);
           }
-          &--old {
+          &_old {
             color: rgb(20, 243, 57);
           }
         }
