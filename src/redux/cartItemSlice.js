@@ -17,9 +17,6 @@ export const CartItemSlicer = createSlice({
       };
     },
     addCart: (state, action) => {
-      // console.log(action.payload);
-      // let quantity =
-      //   action.payload.quantity === undefined ? 1 : action.payload.quantity;
       if (state.numberCart === 0) {
         let cart = {
           id: action.payload.id,

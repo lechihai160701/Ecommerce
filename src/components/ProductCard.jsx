@@ -86,56 +86,71 @@ const ProductCard = (props) => {
       <div className="product__card__item__img">
         <img
           src={data.image}
-          alt=""
+          alt={data.title}
           className="product__card__item__img__view"
         />
-        <div className="product-image-inner">
-          <span className="button add_to_cart_button" onClick={handleAdd}>
-            <span>Add to cart</span>
-          </span>
 
-          <div className="product-additional-content">
-            <div className="lines"></div>
+        {/* HOVER OVERLAY */}
+        <div className="product-image-overlay">
+          <button className="add-to-cart-btn" onClick={handleAdd}>
+            Add to Cart
+          </button>
 
-            <div className="product-additional-content__view">
-              <span className="product-additional-content__view-icon">
-                <Tooltip title="Xem trước">
-                  <Button icon={<EyeOutlined />} onClick={handleOpen} />
-                </Tooltip>
-              </span>
-              {open && (
-                <Modal
-                  open={open}
-                  onCancel={handleClose}
-                  footer={null}
-                  closeIcon={
-                    <Button
-                      style={{ outline: "none", border: "none" }}
-                      icon={<CloseOutlined style={{ fontSize: 24 }} />}
-                    />
-                  }
-                  width={modalWidth}
-                >
-                  <BasicModal item={props} />
-                </Modal>
-              )}
-            </div>
+          <div className="quick-actions">
+            <Tooltip title="Xem trước">
+              <Button
+                type="text"
+                icon={<EyeOutlined />}
+                onClick={handleOpen}
+                className="action-btn"
+              />
+            </Tooltip>
+            {open && (
+              <Modal
+                open={open}
+                onCancel={handleClose}
+                footer={null}
+                closeIcon={
+                  <Button
+                    style={{ outline: "none", border: "none" }}
+                    icon={<CloseOutlined style={{ fontSize: 24 }} />}
+                  />
+                }
+                width={modalWidth}
+              >
+                <BasicModal item={props} />
+              </Modal>
+            )}
 
-            <div className="product-additional-content__heart">
-              <p className="product-additional-content__view-icon">
-                {(() => {
-                  let isCheck = hearts.find((item) => item.id === data.id);
-                  return (
-                    <Button
-                      icon={!isCheck ? <HeartOutlined /> : <HeartFilled />}
-                      onClick={handleToggleHeartSlice}
-                    />
-                  );
-                })()}
-              </p>
-            </div>
+            <Tooltip
+              title={
+                hearts.find((item) => item.id === data.id)
+                  ? "Bỏ yêu thích"
+                  : "Yêu thích"
+              }
+            >
+              <Button
+                type="text"
+                icon={
+                  hearts.find((item) => item.id === data.id) ? (
+                    <HeartFilled />
+                  ) : (
+                    <HeartOutlined />
+                  )
+                }
+                onClick={handleToggleHeartSlice}
+                className="action-btn"
+              />
+            </Tooltip>
           </div>
         </div>
+
+        {/* Đã thêm vào giỏ hàng */}
+        {carts.find((item) => item.id === data.id) && (
+          <div className="added-to-cart-badge">
+            <CheckOutlined />
+          </div>
+        )}
       </div>
 
       <div className="product__card__item__info">
@@ -151,21 +166,6 @@ const ProductCard = (props) => {
           </div>
         </div>
       </div>
-
-      {(() => {
-        const check = carts.find((item) => item.id === data.id);
-        if (check) {
-          return (
-            <div className="product__card__item__isAdd">
-              <span className="product__card__item__isAdd-add">
-                <Tooltip title="Đã thêm vào giỏ hàng">
-                  <CheckOutlined />
-                </Tooltip>
-              </span>
-            </div>
-          );
-        }
-      })()}
     </div>
   );
 };

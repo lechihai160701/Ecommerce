@@ -52,19 +52,19 @@ export const recentPosts = [
   },
   {
     id: 2,
-    img: "https://dongphucunicorn.com/wp-content/uploads/2019/12/ao-khoac-nu-co-non-mau-xanh-navy-800x800.jpg",
+    img: "https://product.hstatic.net/200000325151/product/rgtf-ao-khoac-du-den-4_8df65985063444bab4b716eea3048a75.png",
     name: "Et dolore magna aliqua",
     date: "May 22, 2022",
   },
   {
     id: 3,
-    img: "https://dongphucunicorn.com/wp-content/uploads/2019/12/ao-khoac-nu-co-non-mau-xanh-navy-800x800.jpg",
+    img: "https://img.lazcdn.com/g/p/545b9fa0352be0363ceefa00e1757749.jpg_720x720q80.jpg",
     name: "Amkmm Ut enim ad minim",
     date: "June 03, 2022",
   },
   {
     id: 4,
-    img: "https://dongphucunicorn.com/wp-content/uploads/2019/12/ao-khoac-nu-co-non-mau-xanh-navy-800x800.jpg",
+    img: "https://png.pngtree.com/png-clipart/20240725/original/pngtree-new-spring-autumn-baby-boys-girl-windbreaker-jackets-kids-hooded-coats-png-image_15634201.png",
     name: "Amkmm Ut enim ad minim",
     date: "June 1, 2022",
   },
@@ -72,28 +72,28 @@ export const recentPosts = [
 
 export const gallery = [
   {
-    img: "https://demo.w3layouts.com/demos_new/template_demo/11-06-2021/electronics-mart-liberty-demo_Free/1081434887/web/images/g1.jpg",
+    img: "https://lavendermedia.vn/wp-content/uploads/2019/04/word-image-11.png",
   },
   {
-    img: "https://demo.w3layouts.com/demos_new/template_demo/11-06-2021/electronics-mart-liberty-demo_Free/1081434887/web/images/g2.jpg",
+    img: "https://www.shutterstock.com/image-photo/clothing-store-interior-selective-focus-600nw-2676545633.jpg",
   },
   {
-    img: "https://demo.w3layouts.com/demos_new/template_demo/11-06-2021/electronics-mart-liberty-demo_Free/1081434887/web/images/g3.jpg",
+    img: "https://noithattugia.com/wp-content/uploads/2024/09/thiet-ke-shop-thoi-trang-kien-truc-noi-that-tu-gia-2-e1658538964553.jpg",
   },
   {
-    img: "https://demo.w3layouts.com/demos_new/template_demo/11-06-2021/electronics-mart-liberty-demo_Free/1081434887/web/images/g6.jpg",
+    img: "https://lavenderstudio.com.vn/wp-content/uploads/2021/05/chup-hinh-san-pham-cho-shop2.png",
   },
   {
-    img: "https://demo.w3layouts.com/demos_new/template_demo/11-06-2021/electronics-mart-liberty-demo_Free/1081434887/web/images/g5.jpg",
+    img: "https://vietposrack.sgp1.digitaloceanspaces.com/wp-content/uploads/2023/07/14150809/ke-ao-quan-1.jpg",
   },
   {
-    img: "https://demo.w3layouts.com/demos_new/template_demo/11-06-2021/electronics-mart-liberty-demo_Free/1081434887/web/images/g4.jpg",
+    img: "https://vantaydecor.com/wp-content/uploads/2023/10/Bo-tri-noi-that-khoa-hoc-se-giup-toi-uu-hoa-khong-gian-cho-cua-hang.jpg",
   },
   {
-    img: "https://demo.w3layouts.com/demos_new/template_demo/11-06-2021/electronics-mart-liberty-demo_Free/1081434887/web/images/g7.jpg",
+    img: "https://lavenderstudio.com.vn/wp-content/uploads/2021/05/chup-hinh-san-pham-cho-shop3.jpg",
   },
   {
-    img: "https://demo.w3layouts.com/demos_new/template_demo/11-06-2021/electronics-mart-liberty-demo_Free/1081434887/web/images/g8.jpg",
+    img: "https://pendecor.vn/uploads/files/2023/05/01/thiet-ke-shop-quan-ao-nam-20.jpg",
   },
 ];
 
