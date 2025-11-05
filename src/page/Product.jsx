@@ -42,7 +42,7 @@ const Product = () => {
 
   return (
     <React.Fragment>
-      <Helmet title="Product">
+      <Helmet title="Sản phẩm">
         <Banner img={banner} alt="Banner" marginBottom={50} />
         <Section>
           <SectionBody>

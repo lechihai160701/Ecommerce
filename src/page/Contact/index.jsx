@@ -33,7 +33,7 @@ const Contact = () => {
   };
 
   return (
-    <Helmet title="Liên hệ với chúng tôi">
+    <Helmet title="Liên hệ">
       <div className="contact">
         {/* PHẦN 1: THÔNG TIN LIÊN HỆ */}
         <Section>

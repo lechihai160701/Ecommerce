@@ -101,6 +101,7 @@
         width: 100%;
         padding: 30px;
         height: 100vh;
+        z-index: 1;
         background: $main-bg;
         transition: transform 0.3s;
         transform: translateX(-100%);
