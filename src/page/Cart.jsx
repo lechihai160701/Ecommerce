@@ -1,21 +1,20 @@
-import React, { Fragment, useEffect, useState, useMemo } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import { Helmet, Banner } from "../Common";
 import {
-  clearAllCart,
-  deleteCart,
-  increaseQuantity,
-  decreaseQuantity,
-} from "../redux/cartItemSlice";
-import {
+  DeleteOutlined,
   MinusOutlined,
   PlusOutlined,
-  DeleteOutlined,
   ShoppingCartOutlined,
 } from "@ant-design/icons";
 import { Button, Checkbox } from "antd";
+import React, { Fragment, useEffect, useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { Banner, Helmet } from "../Common";
+import {
+  decreaseQuantity,
+  deleteCart,
+  increaseQuantity,
+} from "../redux/cartItemSlice";
 
 const Cart = () => {
   const { carts, numberCart } = useSelector((state) => state.cart);
@@ -105,24 +104,24 @@ const Cart = () => {
   };
 
   // Cập nhật Redux khi localCarts thay đổi
-  // useEffect(() => {
-  //   if (
-  //     localCarts.length !== carts.length ||
-  //     JSON.stringify(localCarts) !== JSON.stringify(carts)
-  //   ) {
-  //     const increased = localCarts.filter((local) => {
-  //       const reduxItem = carts.find((r) => r.id === local.id);
-  //       return reduxItem && local.quantity > reduxItem.quantity;
-  //     });
-  //     const decreased = localCarts.filter((local) => {
-  //       const reduxItem = carts.find((r) => r.id === local.id);
-  //       return reduxItem && local.quantity < reduxItem.quantity;
-  //     });
+  useEffect(() => {
+    if (
+      localCarts.length !== carts.length ||
+      JSON.stringify(localCarts) !== JSON.stringify(carts)
+    ) {
+      const increased = localCarts.filter((local) => {
+        const reduxItem = carts.find((r) => r.id === local.id);
+        return reduxItem && local.quantity > reduxItem.quantity;
+      });
+      const decreased = localCarts.filter((local) => {
+        const reduxItem = carts.find((r) => r.id === local.id);
+        return reduxItem && local.quantity < reduxItem.quantity;
+      });
 
-  //     if (increased.length > 0) dispatch(increaseQuantity(localCarts));
-  //     if (decreased.length > 0) dispatch(decreaseQuantity(localCarts));
-  //   }
-  // }, [localCarts, carts, dispatch]);
+      if (increased.length > 0) dispatch(increaseQuantity(localCarts));
+      if (decreased.length > 0) dispatch(decreaseQuantity(localCarts));
+    }
+  }, [localCarts, carts, dispatch]);
 
   return (
     <Fragment>

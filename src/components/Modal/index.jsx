@@ -77,16 +77,16 @@ const BasicModal = (props) => {
             <div className={clsx(styles.product_right_inner)}>
               <div className={clsx(styles.product_right_inner_props)}>
                 <Button
-                  icon={<PlusOutlined />}
-                  onClick={() => handleQuantity("PLUS")}
+                  icon={<MinusOutlined />}
+                  onClick={() => handleQuantity("MINUS")}
                   shape="default"
                 />
                 <div className={clsx(styles.product_right_inner_quantity)}>
                   <span>{quantity}</span>
                 </div>
                 <Button
-                  icon={<MinusOutlined />}
-                  onClick={() => handleQuantity("MINUS")}
+                  icon={<PlusOutlined />}
+                  onClick={() => handleQuantity("PLUS")}
                   shape="default"
                 />
               </div>

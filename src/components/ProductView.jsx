@@ -174,7 +174,7 @@ const ProductView = ({ product }) => {
                 <span className="product__view__refer__right__count__title">
                   Số lượng
                 </span>
-                <div className="product-right-inner">
+                {/* <div className="product-right-inner">
                   <div className="product-right-inner-props">
                     <Button
                       icon={<PlusOutlined />}
@@ -190,6 +190,20 @@ const ProductView = ({ product }) => {
                       shape="default"
                     />
                   </div>
+                </div> */}
+
+                <div className="cart__item__quantity">
+                  <Button
+                    icon={<MinusOutlined />}
+                    onClick={() => handleQuantity("MINUS")}
+                    size="small"
+                  />
+                  <span>{quantity}</span>
+                  <Button
+                    icon={<PlusOutlined />}
+                    onClick={() => handleQuantity("PLUS")}
+                    size="small"
+                  />
                 </div>
               </div>
               <div className="product__view__refer__right__item">
