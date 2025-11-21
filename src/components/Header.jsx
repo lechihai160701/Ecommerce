@@ -3,10 +3,17 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 
-import { ShoppingCartOutlined } from "@ant-design/icons";
-import { Badge } from "antd";
-import { useSelector } from "react-redux";
+import {
+  DownOutlined,
+  HeartOutlined,
+  LogoutOutlined,
+  ShoppingCartOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
+import { Avatar, Badge, Button, Dropdown } from "antd";
+import { useDispatch, useSelector } from "react-redux";
 import logo from "../logo.png";
+import { setInfoUser } from "../redux/userSlice";
 const mainNav = [
   {
     display: "Trang chủ",
@@ -27,7 +34,9 @@ const mainNav = [
 ];
 
 const Header = () => {
+  const dispath = useDispatch();
   const { numberCart } = useSelector((state) => state.cart);
+  const { numberHeart } = useSelector((state) => state.heart);
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [user, setUser] = useState("");
@@ -39,6 +48,7 @@ const Header = () => {
   };
 
   const headerRef = useRef(null);
+
   useEffect(() => {
     const handleScroll = () => {
       if (
@@ -61,17 +71,40 @@ const Header = () => {
   const handleLogOut = async () => {
     try {
       await logOut();
+      dispath(setInfoUser(null));
       navigate("/login");
-    } catch (error) {}
+    } catch (error) {
+      alert(error || "Có lỗi xảy ra!");
+    }
   };
+
+  const items = [
+    {
+      key: "1",
+      label: (
+        <Link to="/profile">
+          <UserOutlined /> Thông tin cá nhân
+        </Link>
+      ),
+    },
+    {
+      key: "2",
+      label: (
+        <div onClick={handleLogOut}>
+          <LogoutOutlined /> Đăng xuất
+        </div>
+      ),
+    },
+  ];
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentuser) => {
       setUser(currentuser);
+      dispath(setInfoUser(currentuser?.email));
     });
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [dispath]);
 
   return (
     <div className="header" ref={headerRef}>
@@ -104,34 +137,53 @@ const Header = () => {
             ))}
           </div>
           <div className="header__menu__right">
-            <div
-              className="header__menu__item header__menu__right__item"
-              title="Giỏ hàng"
-            >
+            <div className="header__menu__right__item" title="Yêu thích">
+              <Badge count={numberHeart} showZero>
+                <HeartOutlined style={{ fontSize: 24 }} />
+              </Badge>
+            </div>
+            <div className="header__menu__right__item" title="Giỏ hàng">
               <Badge count={numberCart} showZero>
                 <Link to="/cart">
                   <ShoppingCartOutlined style={{ fontSize: 24 }} />
                 </Link>
               </Badge>
             </div>
-            {user ? (
-              <div className="header__user">
-                <div className="header__user__email">{user.email}</div>
-                <div
-                  className="header__user__logout"
-                  title="Đăng xuất"
-                  onClick={handleLogOut}
+            <div className="header__user">
+              {user ? (
+                <Dropdown
+                  menu={{ items }}
+                  placement="bottomRight"
+                  arrow
+                  trigger={["click"]}
                 >
-                  <i className="bx bx-log-out"></i>
-                </div>
-              </div>
-            ) : (
-              <div className="header__menu__item header__menu__right__item">
-                <Link to="/login">
-                  <i className="bx bx-user"></i>
+                  <div className="header__user__logged">
+                    <Avatar
+                      src={user.photoURL || undefined}
+                      icon={!user.photoURL && <UserOutlined />}
+                      size="default"
+                    />
+                    <span className="header__user__name">
+                      Xin chào,{" "}
+                      {user.displayName?.split(" ")[0] ||
+                        user.email?.split("@")[0] ||
+                        "Bạn"}
+                    </span>
+                    <DownOutlined className="header__user__arrow" />
+                  </div>
+                </Dropdown>
+              ) : (
+                <Link to="/login" className="header__menu__right__item">
+                  <Button
+                    type="text"
+                    size="large"
+                    className="header__login-btn"
+                  >
+                    <UserOutlined /> Đăng nhập
+                  </Button>
                 </Link>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </div>

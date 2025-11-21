@@ -1,4 +1,4 @@
-import { Input, Select } from "antd";
+import { Button, Input, Select, Space } from "antd";
 import clsx from "clsx";
 import { Fragment, useEffect, useRef, useState } from "react";
 import {
@@ -10,6 +10,7 @@ import {
 } from "../../Common";
 import ProductCardSkeleton from "../ProductCardSkeleton";
 import styles from "./ProductHandle.module.scss";
+import { SearchOutlined } from "@ant-design/icons";
 
 const ProductHandle = (props) => {
   const { product, category } = props;
@@ -89,13 +90,18 @@ const ProductHandle = (props) => {
                   </Select.Option>
                 ))}
               </Select>
-              <Input.Search
-                className={clsx(styles.product_handle_filter_option_input)}
-                placeholder="Tên sản phẩm"
-                ref={refInput}
-                onChange={handleSearchProduct}
-                value={searchText}
-              />
+              <Space.Compact
+                className={styles.product_handle_filter_option_input}
+              >
+                <Input
+                  placeholder="Tên sản phẩm"
+                  value={searchText}
+                  onChange={handleSearchProduct}
+                  allowClear
+                  ref={refInput}
+                />
+                <Button type="primary" icon={<SearchOutlined />} />
+              </Space.Compact>
             </div>
           </div>
         </SectionBody>

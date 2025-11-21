@@ -6,21 +6,20 @@ import {
   HeartOutlined,
 } from "@ant-design/icons";
 import { Button, Grid, Modal, Tooltip } from "antd";
-import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { BasicModal, Rating, numberWithCommas } from "../Common";
-import { auth } from "../firebase";
 import { addCart } from "../redux/cartItemSlice";
 import { addHeart, deleteHeart } from "../redux/heartSlice";
 
 const { useBreakpoint } = Grid;
 const ProductCard = (props) => {
+  const { data } = props;
+  const { info } = useSelector((state) => state.user);
   const { carts } = useSelector((state) => state.cart);
   const { hearts } = useSelector((state) => state.heart);
-  const { data } = props;
   const [user, setUser] = useState("");
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -73,13 +72,12 @@ const ProductCard = (props) => {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentuser) => {
-      setUser(currentuser);
-    });
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+    if (info) {
+      setUser(info);
+    } else {
+      setUser("");
+    }
+  }, [info]);
 
   return (
     <div className="product__card__item">

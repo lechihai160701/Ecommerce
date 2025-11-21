@@ -1,17 +1,16 @@
+import axios from "axios";
 import { memo, useEffect, useState } from "react";
 import {
+  Grid,
   Helmet,
-  Slider,
   policy,
+  Policy,
+  ProductCard,
   Section,
   SectionBody,
   SectionTitle,
-  Grid,
-  Policy,
-  ProductCard,
-  IntroDuce,
+  Slider,
 } from "../Common";
-import axios from "axios";
 const Home = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -94,11 +93,6 @@ const Home = () => {
               );
             })}
           </Grid>
-        </SectionBody>
-      </Section>
-      <Section>
-        <SectionBody>
-          <IntroDuce />
         </SectionBody>
       </Section>
     </Helmet>

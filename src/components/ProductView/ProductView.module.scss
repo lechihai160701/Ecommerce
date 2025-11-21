@@ -1,0 +1,246 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+.productDetail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  margin-bottom: 60px;
+
+  @media (max-width: 992px) {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
+.imageSection {
+  .mainImage {
+    border: 1px solid #eee;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 16px;
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.4s ease;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  .thumbnailList {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+
+    .thumbnail {
+      width: 80px;
+      height: 80px;
+      border: 2px solid #eee;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.3s;
+
+      &.active,
+      &:hover {
+        border-color: #667eea;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+}
+
+.infoSection {
+  .title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #1a1a1a;
+  }
+
+  .rating {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+
+    .ratingText {
+      color: #666;
+      font-size: 0.95rem;
+
+      .count {
+        color: #999;
+      }
+    }
+  }
+
+  .price {
+    margin: 24px 0;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 16px;
+
+    .currentPrice {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #e74c3c;
+    }
+
+    .originalPrice {
+      font-size: 1.2rem;
+      text-decoration: line-through;
+      color: #999;
+      margin-left: 12px;
+    }
+  }
+
+  .colorSection,
+  .quantitySection {
+    margin-bottom: 24px;
+
+    h4 {
+      margin-bottom: 12px;
+      color: #333;
+      font-weight: 600;
+    }
+  }
+
+  .colorOptions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+
+    .colorBtn {
+      padding: 10px 20px;
+      border: 2px solid #ddd;
+      border-radius: 12px;
+      background: white;
+      cursor: pointer;
+      transition: all 0.3s;
+
+      &.active,
+      &:hover {
+        border-color: #667eea;
+        background: #f0f4ff;
+        color: #667eea;
+      }
+    }
+  }
+
+  .quantityControl {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    .quantity {
+      min-width: 50px;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+  }
+
+  .actionButtons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 32px 0;
+
+    .buyNowBtn {
+      flex: 1;
+      height: 56px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      border: none;
+      border-radius: 12px;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+      }
+    }
+
+    .addToCartBtn {
+      flex: 1;
+      height: 56px;
+      border: 2px solid #667eea;
+      color: #667eea;
+      background: white;
+      border-radius: 12px;
+      font-weight: 600;
+
+      &:hover {
+        background: #667eea;
+        color: white;
+      }
+    }
+
+    .wishlistBtn {
+      border: 2px solid #ddd;
+      background: white;
+
+      &:hover {
+        border-color: #e74c3c;
+        color: #e74c3c;
+      }
+    }
+  }
+
+  .shippingInfo {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    color: #555;
+
+    p {
+      margin: 8px 0;
+      position: relative;
+      padding-left: 24px;
+
+      &::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #27ae60;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.description {
+  h2 {
+    font-size: 1.8rem;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #eee;
+  }
+
+  p {
+    line-height: 1.8;
+    color: #444;
+  }
+}
+
+.loading {
+  text-align: center;
+  padding: 100px 20px;
+  font-size: 1.2rem;
+  color: #666;
+}

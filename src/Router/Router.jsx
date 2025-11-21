@@ -8,6 +8,7 @@ import {
   Login,
   NotFound,
   Register,
+  Profile,
 } from "../Common";
 const Router = () => {
   return (
@@ -18,6 +19,7 @@ const Router = () => {
       <Route path="/cart" element={<Cart />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/profile" element={<Profile />} />
       <Route path="/product" element={<Product />}>
         <Route index element={<Product />} />
       </Route>

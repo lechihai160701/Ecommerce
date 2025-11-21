@@ -13,17 +13,18 @@
 .container {
   width: 100%;
   max-width: 1100px;
-  height: 620px;
+  height: 640px;
   background: white;
   border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
   display: grid;
   grid-template-columns: 1fr 1fr;
 
   @include tablet {
     grid-template-columns: 1fr;
     height: auto;
+    max-width: 420px;
   }
 }
 
@@ -34,7 +35,7 @@
   background: white;
 
   @include mobile {
-    padding: 40px 25px;
+    padding: 50px 30px;
   }
 }
 
@@ -47,23 +48,25 @@
   font-weight: 700;
   color: #1a1a1a;
   margin-bottom: 8px;
+  text-align: left;
 }
 
 .subtitle {
   color: #666;
   font-size: 1.05rem;
-  margin-bottom: 30px;
+  margin-bottom: 32px;
 }
 
 .icon {
   color: #a0a0a0;
+  font-size: 1.1rem;
 }
 
-// Tùy chỉnh AntD Input cho đẹp hơn
 .antInput {
-  height: 52px;
+  height: 56px;
   border-radius: 12px;
   font-size: 1rem;
+  padding: 0 16px;
 
   &:hover,
   &:focus {
@@ -72,26 +75,38 @@
   }
 }
 
-.loginBtn {
-  height: 52px;
+// Override margin AntD Form.Item
+.form {
+  :global(.ant-form-item) {
+    margin-bottom: 18px !important;
+  }
+  :global(.ant-form-item:last-of-type) {
+    margin-bottom: 0 !important;
+  }
+}
+
+.registerBtn {
+  height: 56px;
   font-size: 1.1rem;
   font-weight: 600;
   background: linear-gradient(90deg, #667eea, #764ba2);
   border: none;
   border-radius: 12px;
-  margin-top: 10px;
+  margin-top: 8px;
 
   &:hover {
     opacity: 0.95;
     transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
   }
 }
 
 .divider {
   text-align: center;
-  margin: 25px 0;
+  margin: 20px 0;
   position: relative;
   color: #999;
+  font-size: 0.95rem;
 
   &::before {
     content: "";
@@ -112,7 +127,7 @@
 .googleBtnWrapper {
   display: flex;
   justify-content: center;
-  margin: 10px 0;
+  margin: 10px 0 20px;
 }
 
 .errorBox {
@@ -121,13 +136,15 @@
   padding: 12px;
   border-radius: 10px;
   text-align: center;
-  margin-top: 15px;
+  margin: 15px 0;
   border: 1px solid #ffccc7;
+  font-size: 0.95rem;
 }
 
-.registerLink {
+.footerText {
   text-align: center;
-  margin-top: 25px;
+  margin: 0;
+  padding-top: 8px;
   color: #666;
   font-size: 0.95rem;
 
@@ -141,7 +158,7 @@
   }
 }
 
-// Right Visual Side
+// Visual Side
 .visualSide {
   position: relative;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -154,7 +171,7 @@
   background: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0.1),
-    rgba(0, 0, 0, 0.4)
+    rgba(0, 0, 0, 0.5)
   );
 }
 
@@ -175,7 +192,7 @@
   }
 
   p {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     opacity: 0.9;
     line-height: 1.6;
   }
@@ -183,46 +200,38 @@
 
 .decorativeCircles {
   position: absolute;
-  bottom: -50px;
-  right: -50px;
-
-  .circle1,
-  .circle2,
-  .circle3 {
-    position: absolute;
-    border-radius: 50%;
-    opacity: 0.15;
-  }
+  bottom: -80px;
+  right: -80px;
 
   .circle1 {
-    width: 300px;
-    height: 300px;
-    background: white;
-    bottom: 50px;
-    right: 50px;
+    width: 350px;
+    height: 350px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
   }
   .circle2 {
-    width: 200px;
-    height: 200px;
-    background: #a78bff;
-    bottom: 120px;
-    right: 150px;
+    width: 250px;
+    height: 250px;
+    background: rgba(167, 139, 255, 0.2);
+    border-radius: 50%;
+    bottom: 100px;
+    right: 100px;
   }
   .circle3 {
-    width: 150px;
-    height: 150px;
-    background: #764ba2;
+    width: 180px;
+    height: 180px;
+    background: rgba(118, 75, 162, 0.3);
+    border-radius: 50%;
     bottom: 200px;
-    right: 30px;
+    right: 50px;
   }
 }
 
-// Responsive
 @include tablet {
   .visualSide {
     display: none;
   }
   .container {
-    border-radius: 16px;
+    border-radius: 20px;
   }
 }
