@@ -15,6 +15,7 @@ import {
   deleteCart,
   increaseQuantity,
 } from "../redux/cartItemSlice";
+import { addListOrder } from "../redux/listOrderSlice";
 
 const Cart = () => {
   const { carts, numberCart } = useSelector((state) => state.cart);
@@ -91,13 +92,16 @@ const Cart = () => {
 
   // Đặt hàng
   const handleOrder = () => {
+    console.log(selectedItems);
     if (selectedItems.length === 0) {
       toast.warning("Vui lòng chọn ít nhất 1 sản phẩm để đặt hàng!");
       return;
     }
     selectedItems.forEach((id) => {
       const item = localCarts.find((x) => x.id === id);
+      console.log("item", item);
       dispatch(deleteCart(item));
+      dispatch(addListOrder({ products: item }));
     });
     toast.success("Đặt hàng thành công! Kiểm tra email sau 3 ngày ^_^");
     setTimeout(() => navigate("/"), 2000);

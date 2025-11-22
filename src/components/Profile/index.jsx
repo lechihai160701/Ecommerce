@@ -10,16 +10,19 @@ import {
   ShoppingCartOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { Button, Card, Empty, Popconfirm } from "antd";
+import { App, Button, Card, Empty, Space } from "antd";
 import axios from "axios";
 import clsx from "clsx";
+import { signOut } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { auth } from "../../firebase";
 import { addCart } from "../../redux/cartItemSlice";
 import { addHeart, deleteHeart } from "../../redux/heartSlice";
 import styles from "./Profile.module.scss";
+import { setInfoUser } from "../../redux/userSlice";
 
 const cn = (...inputs) => clsx(inputs);
 
@@ -29,6 +32,11 @@ const Index = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const { modal } = App.useApp();
+
+  const logOut = () => signOut(auth);
+
   const [activeTab, setActiveTab] = useState("info");
   const [data, setData] = useState([]);
   const [listHeart, setListHeart] = useState([]);
@@ -65,18 +73,27 @@ const Index = () => {
   ];
 
   const handleRemoveFromWishlist = (id) => {
-    const newItems = {
-      id,
-    };
-    let isCheck = hearts.find((item) => item.id === id);
-
-    if (isCheck) {
-      dispatch(deleteHeart(newItems));
-      toast.success("Đã bỏ yêu thích");
-    } else if (!isCheck) {
-      dispatch(addHeart(newItems));
-      toast.success("Đã thêm vào yêu thích");
-    }
+    modal.confirm({
+      title: "Thông báo",
+      content: <div>Xác nhận xóa yêu thích này</div>,
+      okText: "Xác nhận",
+      cancelText: "Hủy",
+      maskClosable: true,
+      onCancel() {},
+      onOk() {
+        const newItems = {
+          id,
+        };
+        let isCheck = hearts.find((item) => item.id === id);
+        if (isCheck) {
+          dispatch(deleteHeart(newItems));
+          toast.success("Đã bỏ yêu thích");
+        } else if (!isCheck) {
+          dispatch(addHeart(newItems));
+          toast.success("Đã thêm vào yêu thích");
+        }
+      },
+    });
   };
 
   const handleAddToCart = (product) => {
@@ -89,6 +106,16 @@ const Index = () => {
     };
     dispatch(addCart(newItems));
     toast.success("Đã thêm vào giỏ hàng!");
+  };
+
+  const handleLogOut = async () => {
+    try {
+      await logOut();
+      dispatch(setInfoUser(null));
+      navigate("/login");
+    } catch (error) {
+      alert(error || "Có lỗi xảy ra!");
+    }
   };
 
   useEffect(() => {
@@ -270,22 +297,17 @@ const Index = () => {
                             Thêm vào giỏ hàng
                           </Button>
 
-                          <Popconfirm
-                            title="Xóa khỏi danh sách yêu thích?"
-                            onConfirm={() =>
-                              handleRemoveFromWishlist(product.id)
-                            }
-                            okText="Xóa"
-                            cancelText="Hủy"
-                            placement="top"
-                          >
+                          <div>
                             <Button
                               danger
                               icon={<DeleteOutlined />}
                               size="large"
                               className={styles.removeBtn}
+                              onClick={() =>
+                                handleRemoveFromWishlist(product.id)
+                              }
                             />
-                          </Popconfirm>
+                          </div>
                         </div>
                       </div>
                     </Card>
@@ -302,9 +324,17 @@ const Index = () => {
           )}
 
           {activeTab === "logout" && (
-            <div className={styles.logoutConfirm}>
-              Bạn có chắc muốn đăng xuất?
-            </div>
+            <>
+              <div className={styles.logoutConfirm}>
+                Bạn có chắc muốn đăng xuất?
+              </div>
+              <Space style={{ margin: "15px 0" }}>
+                <Button onClick={handleLogOut} type="primary">
+                  Có
+                </Button>
+                <Button danger>Không</Button>
+              </Space>
+            </>
           )}
         </div>
       </div>
